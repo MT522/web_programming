@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %} Contestant Profile {% endblock  %}
+
+
+{% block content %}
+{% load static %}
+
+<section class="pb-4 m-3">
+    <div class="border rounded-5 bg-secondary-subtle">
+      
+      <section class="w-100">
+        <link href="{% static '/authenticator/register.css' %}?{% now 'U' %}" rel="stylesheet">
+        <div class="row">
+          <div class="col-sm-6">
+  
+            <div class="row align-items-center">
+              <div class="col px-5 ms-xl-4">
+                <span class="h1 fw-bold mb-0">Contestant Profile</span>
+              </div>
+              <div class="col px-5 ms-xl-4">
+                <i class="bi-alarm" style="font-size: 2rem;"></i>
+                <span class="h1 fw-bold mb-0">3MT</span>
+              </div>
+            </div>
+  
+            {% if user.is_authenticated %}
+            <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-2 pt-5 pt-xl-0 mt-xl-n5">
+                <h1>{{ contestant.user.username }}'s Profile</h1>
+                <p><strong>Gender:</strong> {{ contestant.gender }}</p>
+                <p><strong>Phone Number:</strong> {{ contestant.phone }}</p>
+                <p><strong>Telegram ID:</strong> {{ contestant.telegram_id }}</p>
+                <p><strong>National ID:</strong> {{ contestant.national_id }}</p>
+                <p><strong>Affiliation:</strong> {{ contestant.affiliation }}</p>
+                <p><strong>Major:</strong> {{ contestant.major }}</p>
+                <p><strong>Advising Professor:</strong> {{ contestant.prof_name }}</p>
+                <p><strong>Professor Email:</strong> {{ contestant.prof_email }}</p>
+                <p><strong>Resume:</strong> <a href="{{ contestant.resume.url }}">Download</a></p>
+                <p><strong>Consent to Share Resume:</strong> {{ contestant.resume_share_consent }}</p>
+                <p><strong>League:</strong> {{ contestant.league }}</p>
+            </div>
+            {% else %}
+            <p>You must be logged in to view your profile.</p>
+            {% endif %}
+  
+          </div>
+          <div class="col-sm-6 px-0 d-none d-sm-block">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+{% endblock  %}
